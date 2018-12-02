@@ -22,15 +22,15 @@ func NewBS(debug bool) BubbleSort  {
 
 func (this *BubbleSort) Sort(arr []int)  {
 	for i := 0; i < len(arr) ; i++ {
-		for j := i + 1; j < len(arr) ; j++ {
-			if arr[i] > arr[j] {
+		for j := 0; j < len(arr) - 1; j++ {
+			if arr[j] > arr[j+1] {
 				if this.debug {
-					fmt.Printf("交换之前, %v %d %d ---", arr, i, j)
+					fmt.Printf("%v - %d %d - ", arr, i, j)
 				}
-				arr[i], arr[j] = arr[j], arr[i]
+				arr[j], arr[j+1] = arr[j+1], arr[j]
 				this.SwapCount++
 				if this.debug {
-					fmt.Println("交换之后, ", arr, i, j)
+					fmt.Println(arr)
 				}
 			}
 			this.CycleCount++

@@ -34,7 +34,6 @@ func doQuickSort(arr []int, debug bool) []int  {
 	return v
 }
 
-
 func doSelectionSort(arr []int, debug bool) []int {
 	tr.Start();
 	fmt.Printf("选择排序开始,总共%d个元素\n", len(arr))
@@ -46,16 +45,29 @@ func doSelectionSort(arr []int, debug bool) []int {
 	return v
 }
 
+func doInsertionSort(arr []int, debug bool) []int {
+	tr.Start();
+	fmt.Printf("插入排序开始,总共%d个元素\n", len(arr))
+	is := sort.NewIS(debug)
+	var v = cpy(arr)
+	tr.End()
+	is.Sort(v)
+	fmt.Printf("插入排序结束，耗时%s,循环次数%d, 交换次数%d\n", tr.MicroSec(), is.CycleCount, is.SwapCount)
+	return v
+}
+
 func doSort (length int, output bool)  {
 	v := tool.MakeArr(length)
 	v1 := doQuickSort(v, false)
 	v2 := doBubbleSort(v, false)
 	v3 := doSelectionSort(v, false)
+	v4 := doInsertionSort(v, false)
 	if output {
 		fmt.Println(v)
 		fmt.Println(v1)
 		fmt.Println(v2)
 		fmt.Println(v3)
+		fmt.Println(v4)
 	}
 }
 
@@ -70,6 +82,6 @@ func doTest()  {
 var tr = tool.TimeRecord{}
 
 func main() {
-	doSort(200, false)
+	doSort(10, true)
 }
 
