@@ -22,6 +22,7 @@ func NewBS(debug bool) BubbleSort  {
 
 func (this *BubbleSort) Sort(arr []int)  {
 	for i := 0; i < len(arr) ; i++ {
+		swap := false
 		for j := 0; j < len(arr) - 1; j++ {
 			if arr[j] > arr[j+1] {
 				if this.debug {
@@ -29,11 +30,16 @@ func (this *BubbleSort) Sort(arr []int)  {
 				}
 				arr[j], arr[j+1] = arr[j+1], arr[j]
 				this.SwapCount++
+				swap = true
 				if this.debug {
 					fmt.Println(arr)
 				}
 			}
 			this.CycleCount++
+		}
+		if (!swap) {
+			// 冒泡排序优化，当某次排序没有交换的生活，说明已经是有序的了
+			break;
 		}
 	}
 }

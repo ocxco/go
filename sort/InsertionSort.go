@@ -18,19 +18,20 @@ func NewIS(debug bool) InsertionSort  {
 }
 
 func (this *InsertionSort) Sort(arr []int)  {
-	for i := 0; i < len(arr) ; i++ {
-		for j := 0; j < i; j++ {
-			if arr[i] < arr[j] {
-				if this.debug {
-					fmt.Printf("%v - %d %d - ", arr, i, j)
-				}
-				arr[i], arr[j] = arr[j], arr[i]
-				this.SwapCount++
-				if this.debug {
-					fmt.Println(arr)
-				}
+	for i := 1; i < len(arr) ; i++ {
+		preIndex := i - 1
+		current := arr[i]
+		for  ;preIndex >= 0 && arr[preIndex] > current; preIndex-- {
+			if this.debug {
+				fmt.Printf("%v - %d %d - ", arr, i, preIndex)
 			}
 			this.CycleCount++
+			this.SwapCount++
+			arr[preIndex + 1] = arr[preIndex]
+			if this.debug {
+				fmt.Println(arr)
+			}
 		}
+		arr[preIndex + 1] = current
 	}
 }

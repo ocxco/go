@@ -12,7 +12,7 @@ func cpy(arr []int) []int {
 	return v
 }
 
-func doBubbleSort(arr []int, debug bool) []int  {
+func doBubbleSort(arr []int, debug bool, output bool) {
 	fmt.Printf("冒泡排序开始,总共%d个元素\n", len(arr))
 	var v = cpy(arr)
 	bs := sort.NewBS(debug)
@@ -20,10 +20,10 @@ func doBubbleSort(arr []int, debug bool) []int  {
 	bs.Sort(v)
 	tr.End()
 	fmt.Printf("冒泡排序结束，耗时%s, 循环次数%d, 交换次数%d\n", tr.MicroSec(), bs.CycleCount, bs.SwapCount)
-	return v
+	fmt.Println(v)
 }
 
-func doQuickSort(arr []int, debug bool) []int  {
+func doQuickSort(arr []int, debug bool, output bool) {
 	tr.Start();
 	fmt.Printf("快速排序开始,总共%d个元素\n", len(arr))
 	qs := sort.NewQS(debug)
@@ -31,10 +31,10 @@ func doQuickSort(arr []int, debug bool) []int  {
 	tr.End()
 	qs.Sort(v)
 	fmt.Printf("快速排序结束，耗时%s,循环次数%d, 交换次数%d\n", tr.MicroSec(), qs.CycleCount, qs.SwapCount)
-	return v
+	fmt.Println(v)
 }
 
-func doSelectionSort(arr []int, debug bool) []int {
+func doSelectionSort(arr []int, debug bool, output bool) {
 	tr.Start();
 	fmt.Printf("选择排序开始,总共%d个元素\n", len(arr))
 	ss := sort.NewSS(debug)
@@ -42,10 +42,10 @@ func doSelectionSort(arr []int, debug bool) []int {
 	tr.End()
 	ss.Sort(v)
 	fmt.Printf("选择排序结束，耗时%s,循环次数%d, 交换次数%d\n", tr.MicroSec(), ss.CycleCount, ss.SwapCount)
-	return v
+	fmt.Println(v)
 }
 
-func doInsertionSort(arr []int, debug bool) []int {
+func doInsertionSort(arr []int, debug bool, output bool) {
 	tr.Start();
 	fmt.Printf("插入排序开始,总共%d个元素\n", len(arr))
 	is := sort.NewIS(debug)
@@ -53,22 +53,18 @@ func doInsertionSort(arr []int, debug bool) []int {
 	tr.End()
 	is.Sort(v)
 	fmt.Printf("插入排序结束，耗时%s,循环次数%d, 交换次数%d\n", tr.MicroSec(), is.CycleCount, is.SwapCount)
-	return v
+	fmt.Println(v)
 }
 
 func doSort (length int, output bool)  {
 	v := tool.MakeArr(length)
-	v1 := doQuickSort(v, false)
-	v2 := doBubbleSort(v, false)
-	v3 := doSelectionSort(v, false)
-	v4 := doInsertionSort(v, false)
 	if output {
 		fmt.Println(v)
-		fmt.Println(v1)
-		fmt.Println(v2)
-		fmt.Println(v3)
-		fmt.Println(v4)
 	}
+	doQuickSort(v, false, output)
+	doBubbleSort(v, false, output)
+	doSelectionSort(v, false, output)
+	doInsertionSort(v, false, output)
 }
 
 func doTest()  {
